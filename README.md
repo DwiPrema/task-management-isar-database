@@ -1,16 +1,81 @@
-# todo_list_isar_database
+# 📝 Todo List App (Flutter + Isar)
 
-A new Flutter project.
+A simple **Todo List application** built with **Flutter** and **Isar Database**.  
+This project is currently in the **initial setup stage** and focuses on ensuring **dependency stability and compatibility**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Tech Stack
 
-A few resources to get you started if this is your first Flutter project:
+- **Flutter**: 3.16.9
+- **Dart**: 3.2.6
+- **Database**: Isar
+- **State Management**: (Not implemented yet)
+- **Platform**: Android, iOS, Web, Desktop
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 Why Flutter 3.16.9?
+
+This project intentionally uses **Flutter 3.16.9** for the following reasons:
+
+- ✅ **Stable compatibility with Isar 3.x**
+- ✅ Avoids Android Gradle Plugin (AGP) namespace issues
+- ✅ Prevents breaking changes introduced in newer Flutter versions
+- ✅ Ensures consistent behavior across environments
+
+> ⚠️ At the time of development, **Isar is not fully compatible with the latest Flutter versions**.  
+> Using Flutter 3.16.9 provides a stable and predictable development experience.
+
+---
+
+## 🔧 Flutter Version Management (FVM)
+
+This project uses **FVM (Flutter Version Management)** to **lock** the Flutter SDK version.
+
+### Required Flutter Version
+- 3.16.9
+The version is defined in : **.fvmrc**
+
+### Install FVM (if not installed)
+```bash
+dart pub global activate fvm
+```
+
+### Setup The Project
+```bash
+fvm install
+fvm use
+fvm flutter pub get
+```
+
+### Run The App
+```bash
+fvm flutter run
+```
+
+## Project Status 📂
+
+- ✅ Project initialized
+
+- ✅ Flutter & Isar configured
+
+- ⏳ UI implementation (pending)
+
+- ⏳ CRUD features (pending)
+
+- ⏳ State management (pending)
+
+This repository currently serves as a clean and stable base project.
+
+## 🧠 Future Plans
+
+- Add Todo CRUD (Create, Read, Update, Delete)
+
+- Implement local persistence using Isar
+
+- Introduce state management (Bloc / Riverpod)
+
+- Improve UI & UX
+
+- Add search and filter features
