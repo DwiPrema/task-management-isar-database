@@ -1,6 +1,6 @@
-# 📝 Todo List App (Flutter + Isar)
+# 📝 Task Management App (Flutter + Isar)
 
-A simple **Todo List application** built with **Flutter** and **Isar Database**.  
+A simple **Task Management application** built with **Flutter** and **Isar Database**.  
 This project is currently in the **initial setup stage** and focuses on ensuring **dependency stability and compatibility**.
 
 ---

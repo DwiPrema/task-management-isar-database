@@ -18,4 +18,18 @@ class Todo {
 
   DateTime createdAt = DateTime.now();
   DateTime updatedAt = DateTime.now();
+
+  Todo copyWith({
+    String? title,
+    String? description,
+    Status? status,
+  }) {
+    return Todo()
+      ..id = id
+      ..status = status ?? this.status
+      ..createdAt = createdAt
+      ..updatedAt = updatedAt
+      ..title = title ?? this.title
+      ..description = description ?? this.description;
+  }
 }

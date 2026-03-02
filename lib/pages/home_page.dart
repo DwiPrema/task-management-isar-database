@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:todo_list_isar_database/core/constant/app_color.dart';
+import 'package:todo_list_isar_database/model/todo.dart';
+import 'package:todo_list_isar_database/pages/task_create.dart';
+import 'package:todo_list_isar_database/services/database_service.dart';
 import 'package:todo_list_isar_database/widget/button.dart';
 import 'package:todo_list_isar_database/widget/snap_effect.dart';
 import 'package:todo_list_isar_database/widget/text_widget.dart';
@@ -13,6 +18,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Todo> todos = [];
+
+  StreamSubscription? todoStream;
+
+  @override
+  void initState() {
+    super.initState();
+    todoStream = DatabaseService.db.todos
+        .buildQuery<Todo>()
+        .watch(fireImmediately: true)
+        .listen((data) {
+      setState(() {
+        todos = data;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    todoStream?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +85,13 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                           borderRadius: BorderRadius.circular(5),
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const TaskCreatePage()));
+                          }),
                     ],
                   )
                 ],
@@ -93,16 +127,17 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 24),
                       ],
                     ),
-                    ...List.generate(11, 
-                    (index) {
-                      return const Padding(
-                        padding: EdgeInsets.only(bottom : 16),
+                    ...List.generate(todos.length, (index) {
+                      final todo = todos[index];
+
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
                         child: TodoCard(
-                            title: "Task Title",
+                            title: todo.title,
                             description:
-                                "here is the place for description, but it is opsional, you can display the description or not, but max 2 lines, the overflow use elipsis",
-                            status: "status : pending",
-                            date: "created at : 11 augustr"),
+                                todo.description,
+                            status: "status : ${todo.status}",
+                            date: "created at : ${todo.createdAt}"),
                       );
                     }),
                   ],
