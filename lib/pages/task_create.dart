@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_list_isar_database/core/constant/app_color.dart';
 import 'package:todo_list_isar_database/model/enum_status.dart';
 import 'package:todo_list_isar_database/model/todo.dart';
@@ -27,6 +28,8 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
 
   @override
   Widget build(BuildContext context) {
+    String dateNow = DateFormat('EEE, dd MMMM yyyy').format(DateTime.now());
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -108,7 +111,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
                         fontSize: 24,
                         fontWeight: FontWeight.w400,
                         color: AppColors.black),
-                    textInter("11 August",
+                    textInter(dateNow,
                         fontSize: 10,
                         fontWeight: FontWeight.w300,
                         color: AppColors.black),

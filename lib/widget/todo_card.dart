@@ -8,13 +8,20 @@ class TodoCard extends StatelessWidget {
   final String? description;
   final String status;
   final String date;
+  final VoidCallback onTapRemove;
+  final VoidCallback onTapEdit;
 
+
+/// use TodoCard to display a card of task data
   const TodoCard(
       {super.key,
       required this.title,
       required this.description,
       required this.status,
-      required this.date});
+      required this.date,
+      required this.onTapRemove,
+      required this.onTapEdit,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -65,18 +72,24 @@ class TodoCard extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              const Row(
+              Row(
                 children: [
-                  Icon(
-                    Icons.delete,
-                    size: 22,
-                    color: AppColors.black,
+                  GestureDetector(
+                    onTap: onTapRemove,
+                    child: const Icon(
+                      Icons.delete,
+                      size: 22,
+                      color: AppColors.black,
+                    ),
                   ),
-                  SizedBox(width: 8,),
-                  Icon(
-                    Icons.edit_square,
-                    size: 22,
-                    color: AppColors.black,
+                  const SizedBox(width: 8,),
+                  GestureDetector(
+                    onTap: onTapEdit,
+                    child: const Icon(
+                      Icons.edit_square,
+                      size: 22,
+                      color: AppColors.black,
+                    ),
                   )
                 ],
               )

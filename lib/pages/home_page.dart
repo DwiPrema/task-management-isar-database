@@ -9,6 +9,7 @@ import 'package:todo_list_isar_database/widget/button.dart';
 import 'package:todo_list_isar_database/widget/snap_effect.dart';
 import 'package:todo_list_isar_database/widget/text_widget.dart';
 import 'package:todo_list_isar_database/widget/todo_card.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,6 +44,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTimeNow = DateTime.now();
+    String day = DateFormat('EEEE').format(dateTimeNow);
+    String dateAndMonth = DateFormat('dd MMMM yyyy').format(dateTimeNow);
+
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
@@ -68,11 +73,11 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textPoppins("Sunday",
+                          textPoppins(day,
                               fontSize: 24,
                               fontWeight: FontWeight.w300,
                               align: TextAlign.left),
-                          textInter("11 August",
+                          textInter(dateAndMonth,
                               fontSize: 10,
                               fontWeight: FontWeight.w300,
                               align: TextAlign.left),
@@ -129,15 +134,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ...List.generate(todos.length, (index) {
                       final todo = todos[index];
+                      final date = DateFormat('EEE, dd MMMM yyyy').format(todo.createdAt);
 
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 16),
                         child: TodoCard(
+                            onTapEdit: () {},
+                            onTapRemove: () {
+                              return _removeAlert(todo);
+                            },
                             title: todo.title,
-                            description:
-                                todo.description,
-                            status: "status : ${todo.status}",
-                            date: "created at : ${todo.createdAt}"),
+                            description: todo.description,
+                            status: "status : ${todo.status.name}",
+                            date: "created at : $date"),
                       );
                     }),
                   ],
@@ -148,5 +157,85 @@ class _HomePageState extends State<HomePage> {
         ],
       )),
     );
+  }
+
+  /// use this for remove task alert
+  void _removeAlert(Todo todo) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            icon: const Icon(
+              Icons.delete,
+              size: 35,
+            ),
+            title: textPoppins("Are you sure to remove this task ?",
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: AppColors.black),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 24,
+                ),
+                textInter("Title : ${todo.title}",
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.black,
+                    align: TextAlign.left),
+                const SizedBox(
+                  height: 16,
+                ),
+                textPoppins("Description : ${todo.description}",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    color: AppColors.black,
+                    align: TextAlign.left),
+                const SizedBox(
+                  height: 16,
+                ),
+                textPoppins("Status : ${todo.status.name}",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    color: AppColors.black,
+                    align: TextAlign.left),
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
+            actions: [
+              Button(
+                  text: "remove",
+                  textColor: AppColors.white,
+                  bgColor: AppColors.primaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  borderRadius: BorderRadius.circular(100),
+                  onPressed: () async {
+                    await DatabaseService.db.writeTxn(
+                      () async {
+                        await DatabaseService.db.todos.delete(todo.id);
+                      },
+                    );
+
+                    if (!context.mounted) return;
+                    Navigator.pop(context);
+                  }),
+              Button(
+                  text: "cancel",
+                  textColor: AppColors.black,
+                  bgColor: AppColors.black.withAlpha(50),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  borderRadius: BorderRadius.circular(100),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          );
+        });
   }
 }
