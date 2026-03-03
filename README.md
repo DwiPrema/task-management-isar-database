@@ -60,11 +60,11 @@ fvm flutter run
 
 - ✅ Flutter & Isar configured
 
-- ⏳ UI implementation (pending)
+- ✅ UI implementation
 
-- ⏳ CRUD features (pending)
+- ⏳ CRUD features (in progress)
 
-- ⏳ State management (pending)
+- ⏳ Status Kategori (pending)
 
 This repository currently serves as a clean and stable base project.
 
@@ -74,8 +74,4 @@ This repository currently serves as a clean and stable base project.
 
 - Implement local persistence using Isar
 
-- Introduce state management (Bloc / Riverpod)
-
 - Improve UI & UX
-
-- Add search and filter features
