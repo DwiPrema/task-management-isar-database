@@ -13,6 +13,8 @@ class TextFieldTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      minLines: 1,
+      maxLines: null,
       style: GoogleFonts.poppins(color: AppColors.black, fontSize: 24, fontWeight: FontWeight.w300),
       controller: textEditingController,
       decoration: InputDecoration(
@@ -33,8 +35,7 @@ class TextFieldDesc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TextField(
+    return TextField(
         style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w300, color: AppColors.black),
         controller: textEditingController,
         decoration: InputDecoration(
@@ -43,9 +44,8 @@ class TextFieldDesc extends StatelessWidget {
           alignLabelWithHint: true,
         ),
         keyboardType: TextInputType.multiline,
+        minLines: 1,
         maxLines: null,
-        expands: true,
-      ),
     );
   }
 }

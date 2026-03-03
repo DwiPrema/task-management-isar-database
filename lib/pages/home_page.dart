@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
     String dateAndMonth = DateFormat('dd MMMM yyyy').format(dateTimeNow);
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.primaryColor,
       body: SafeArea(
           child: Stack(

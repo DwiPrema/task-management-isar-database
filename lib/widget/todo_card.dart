@@ -11,17 +11,16 @@ class TodoCard extends StatelessWidget {
   final VoidCallback onTapRemove;
   final VoidCallback onTapEdit;
 
-
-/// use TodoCard to display a card of task data
-  const TodoCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.status,
-      required this.date,
-      required this.onTapRemove,
-      required this.onTapEdit,
-      });
+  /// use TodoCard to display a card of task data
+  const TodoCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.status,
+    required this.date,
+    required this.onTapRemove,
+    required this.onTapEdit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +48,19 @@ class TodoCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    textInter(title,
-                        fontSize: 14,
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w800),
+                    Text(
+                      title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                          fontSize: 14,
+                          color: AppColors.black,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    // textInter(title,
+                    //     fontSize: 14,
+                    //     color: AppColors.black,
+                    //     fontWeight: FontWeight.w800),
                     const SizedBox(
                       height: 16,
                     ),
@@ -82,7 +90,9 @@ class TodoCard extends StatelessWidget {
                       color: AppColors.black,
                     ),
                   ),
-                  const SizedBox(width: 8,),
+                  const SizedBox(
+                    width: 8,
+                  ),
                   GestureDetector(
                     onTap: onTapEdit,
                     child: const Icon(
