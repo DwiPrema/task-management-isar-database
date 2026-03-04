@@ -1,7 +1,7 @@
 # 📝 Task Management App (Flutter + Isar)
 
 A simple **Task Management application** built with **Flutter** and **Isar Database**.  
-This project is currently in the **initial setup stage** and focuses on ensuring **dependency stability and compatibility**.
+This project represents a stable initial release focusing on core task management features.
 
 ---
 
@@ -10,7 +10,6 @@ This project is currently in the **initial setup stage** and focuses on ensuring
 - **Flutter**: 3.16.9
 - **Dart**: 3.2.6
 - **Database**: Isar
-- **State Management**: (Not implemented yet)
 - **Platform**: Android, iOS, Web, Desktop
 
 ---
@@ -76,3 +75,6 @@ This repository currently serves as a clean and stable base project.
 | Home | Task List | Create Task | Edit Task |
 |-----|---------|----------|----------|
 | ![](assets/app_screenshot/Screenshot_1.jpg) | ![](assets/app_screenshot/Screenshot_5.jpg) | ![](assets/app_screenshot/Screenshot_3.jpg) | ![](assets/app_screenshot/Screenshot_4.jpg) |
+
+## 📥 Download APK
+➡️ https://github.com/DwiPrema/task-management-isar-database/releases/tag/v1.0.0
